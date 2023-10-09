@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>DK</PackageId>
+    <Title>FloydWarshell algorithm</Title>
+    <Version>1.0.1</Version>
+    <Authors>Denis Kolotsei</Authors>
+    <Company>Denis Kolotsei</Company>
+    <Description>FloydWarshell</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+</Project>
