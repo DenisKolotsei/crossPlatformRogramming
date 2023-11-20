@@ -1,26 +1,81 @@
 ﻿using System;
 using McMaster.Extensions.CommandLineUtils;
 using lr4Lib;
+using System.Reflection;
 
 class Program
 {
     static int resolveLab(int num, string pathInput, string pathOutput)
     {
-        if (pathInput  == null || pathOutput == null)
+        if (pathInput != null && pathOutput != null)
         {
-            if (!Directory.Exists(Environment.GetEnvironmentVariable("LAB_PATH"))) return 2;
-            lr1.Resolve(Environment.GetEnvironmentVariable("LAB_PATH") + "input.txt",
-                Environment.GetEnvironmentVariable("LAB_PATH") + "output.txt");
+            if (!File.Exists(pathInput) || !File.Exists(pathOutput)) return 2;
+            switch (num)
+            {
+                case 1:
+                    lr1.Resolve(pathInput, pathOutput);
+                    break;
+                case 2:
+                    lr2.Resolve(pathInput, pathOutput);
+                    break;
+                case 3:
+                    lr3.Resolve(pathInput, pathOutput);
+                    break;
+            }
         }
         else
         {
-            if (!Directory.Exists(pathInput) || !Directory.Exists(pathOutput)) return 2;
-            lr1.Resolve(pathInput, pathOutput);
+            {
+                if (Directory.Exists(Environment.GetEnvironmentVariable("LAB_PATH")))
+                {
+                    switch (num)
+                    {
+                        case 1:
+                            lr1.Resolve(Environment.GetEnvironmentVariable("LAB_PATH") + "\\input.txt",
+                            Environment.GetEnvironmentVariable("LAB_PATH") + "\\output.txt");
+                            break;
+                        case 2:
+                            lr2.Resolve(Environment.GetEnvironmentVariable("LAB_PATH") + "\\input.txt",
+                            Environment.GetEnvironmentVariable("LAB_PATH") + "\\output.txt");
+                            break;
+                        case 3:
+                            lr3.Resolve(Environment.GetEnvironmentVariable("LAB_PATH") + "\\input.txt",
+                            Environment.GetEnvironmentVariable("LAB_PATH") + "\\output.txt");
+                            break;
+                    }
+                }
+                else
+                {
+                    string userDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+                    string inputPath = Path.Combine(userDirectory, "input.txt");
+                    string outputPath = Path.Combine(userDirectory, "output.txt");
+
+                    if (File.Exists(inputPath) && File.Exists(outputPath))
+                    {
+                        switch (num)
+                        {
+                            case 1:
+                                lr1.Resolve(inputPath, outputPath);
+                                break;
+                            case 2:
+                                lr2.Resolve(inputPath, outputPath);
+                                break;
+                            case 3:
+                                lr3.Resolve(inputPath, outputPath);
+                                break;
+                        }
+                    }
+                }
+            }
         }
         return 0;
     }
     static void Main(string[] args)
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+        Console.InputEncoding = System.Text.Encoding.UTF8;
+
         var app = new CommandLineApplication();
         app.Name = "MyApp";
 
@@ -46,8 +101,16 @@ class Program
             versionCmd.Description = "Виводить інформацію про автора та версію";
             versionCmd.OnExecute(() =>
             {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                object[] attributes = assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), false);
                 Console.WriteLine("Автор: Kolotsei Denis");
-                Console.WriteLine("Версія: 1.0");
+                if (attributes.Length > 0)
+                {
+                    // Получаем версию из первого атрибута (если есть несколько, можете выбрать нужный)
+                    AssemblyFileVersionAttribute fileVersionAttribute = (AssemblyFileVersionAttribute)attributes[0];
+
+                    Console.WriteLine("Версія: " + fileVersionAttribute.Version);
+                }
                 return 0;
             });
         });
@@ -116,13 +179,17 @@ class Program
             try
             {
                 int res = app.Execute(inputArgs);
-                if(res == 1)
+                if (res == 1)
                 {
                     Console.WriteLine("Немає бовязкових параметрів.");
                 }
-                else if(res == 2)
+                else if (res == 2)
                 {
                     Console.WriteLine("Невірно вказаний шлях.");
+                }
+                else if (res == 0)
+                {
+                    Console.WriteLine("Виконано успішно!");
                 }
             }
             catch (Exception)
