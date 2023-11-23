@@ -2,6 +2,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "gusztavvargadr/windows-10"
   config.vm.network "private_network", type: "dhcp"
   config.vm.provider "virtualbox" do |vb|
+  config.vm.network "public_network"
     vb.memory = 2048 # Укажите необходимое количество оперативной памяти
     vb.cpus = 2 # Укажите количество виртуальных CPU
   end
