@@ -20,7 +20,7 @@ namespace lr5.Controllers
             var scopes = new[]{"https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"};
             string scope = string.Join(" ", scopes);
 
-            string redirectUrl = $"https://localhost:7092/OAuth/Code";
+            string redirectUrl = $"https://localhost:5001/OAuth/Code";
             string verCode = Guid.NewGuid().ToString();
             string code = ComputeHash(verCode);
 
@@ -32,7 +32,7 @@ namespace lr5.Controllers
 
         public async Task<ActionResult> Code(string code)
         {
-            string redirectUrl = "https://localhost:7092/OAuth/Code";
+            string redirectUrl = "https://localhost:5001/OAuth/Code";
             string verCode = HttpContext.Session.GetString("codeVerifier");
             TokenResult resToken = await GoogleAuth.ExchangeCodeToToken(code, verCode, redirectUrl);
             if (resToken != null)

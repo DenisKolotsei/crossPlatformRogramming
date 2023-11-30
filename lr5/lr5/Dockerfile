@@ -1,19 +1,17 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
-EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-WORKDIR /src
-COPY ["lr5.csproj", "."]
-RUN dotnet restore "./lr5.csproj"
+# Копирование и восстановление зависимостей
+COPY *.csproj .
+RUN dotnet restore
+
+# Копирование остальных файлов и сборка
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "lr5.csproj" -c Release -o /app/build
+RUN dotnet publish -c Release -o out
 
-FROM build AS publish
-RUN dotnet publish "lr5.csproj" -c Release -o /app/publish
-
-FROM base AS final
+# Образ для запуска
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/out .
+
 ENTRYPOINT ["dotnet", "lr5.dll"]
