@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>lr4</ToolCommandName>
+    <Version>1.3.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

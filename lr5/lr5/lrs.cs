@@ -1,4 +1,4 @@
-﻿namespace lr4Lib
+﻿namespace lr5
 {
     public class lr1
     {
@@ -64,27 +64,12 @@
             }
             return counter;
         }
-
-        public static void Resolve(string pathInput, string pathOutput)
-        {
-            string[] lines = File.ReadAllLines(pathInput);
-            int combinations = Solve(lines[0], lines[1]);
-
-
-            using (StreamWriter writer = new StreamWriter(pathOutput))
-            {
-                writer.WriteLine(combinations);
-            }
-        }
     }
 
     public class lr2
     {
-        public static void Resolve(string pathInput, string pathOutput)
+        public static int Resolve(int n)
         {
-            // Читаємо n з файлу INPUT.TXT
-            int n = int.Parse(File.ReadAllText(pathInput));
-
             List<int> sequence = new List<int>();
             sequence.Add(1);
 
@@ -92,8 +77,7 @@
             {
                 if (sequence.Count == n)
                 {
-                    File.WriteAllText(pathOutput, sequence.Last<int>().ToString());
-                    break;
+                    return sequence.Last<int>();
                 }
                 int next = FindNextElement(sequence);
                 sequence.Add(next);
@@ -123,24 +107,6 @@
 
     public class lr3
     {
-        public static void Resolve(string pathInput, string pathOutput)
-        {
-            using (StreamReader reader = new StreamReader(pathInput))
-            using (StreamWriter writer = new StreamWriter(pathOutput))
-            {
-                string[] input = reader.ReadLine().Split();
-                int N = int.Parse(input[0]);
-                int x1 = int.Parse(input[1]);
-                int y1 = int.Parse(input[2]);
-                int x2 = int.Parse(input[3]);
-                int y2 = int.Parse(input[4]);
-
-                int shortestPath = Search(N, x1, y1, x2, y2);
-
-                writer.WriteLine(shortestPath);
-            }
-        }
-
         public static int Search(int N, int x1, int y1, int x2, int y2)
         {
             int[,] distance = new int[N, N];

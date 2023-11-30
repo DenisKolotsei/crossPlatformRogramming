@@ -1,0 +1,45 @@
+﻿@{
+}
+
+<div class="">
+    <ul>
+        <h3>Виконати лабораторну роботу 1:</h3>
+        <h4>
+            Дано два шаблони: p1 і p2. Розглянемо множину S1 рядків, які можуть бути отримані з p1
+            за описаними правилами, і множина S2 рядків, які можуть бути отримані з p2. Необхідно
+            знайти кількість рядків, що входять в обидва ці множини.
+        </h4>
+        <li class="">
+            Введіть пергий рядок
+            <input type="text" id="input1" value=""/>
+        </li>
+        <li class="nav-item">
+            Введіть другий рядок
+            <input type="text" id="input2" value="" />
+        </li>
+    </ul>
+    <button id="myButton"> Run </button>
+    <ul>
+        <h3>Результат</h3>
+        <li class="nav-item" id="res1">
+           
+        </li>
+    </ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myButton").click(function () {
+                // Вызов AJAX-запроса для отправки данных на сервер
+                $.ajax({
+                    url: "/Labs/HandleRunLab1", // Замените на свой URL и действие контроллера
+                    type: "POST",
+                    data: {str1: $("#input1").val(), str2: $("#input2").val() },
+                    success: function (result) {
+                        $("#res1").html(result.res1);
+                    },
+                });
+            });
+        });
+    </script>
+</div>

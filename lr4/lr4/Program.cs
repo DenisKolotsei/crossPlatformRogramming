@@ -14,62 +14,60 @@ class Program
             {
                 case 1:
                     lr1.Resolve(pathInput, pathOutput);
-                    break;
+                    return 0;
                 case 2:
                     lr2.Resolve(pathInput, pathOutput);
-                    break;
+                    return 0;
                 case 3:
                     lr3.Resolve(pathInput, pathOutput);
-                    break;
+                    return 0;
             }
         }
         else
         {
+            if (Directory.Exists(Environment.GetEnvironmentVariable("LAB_PATH")))
             {
-                if (Directory.Exists(Environment.GetEnvironmentVariable("LAB_PATH")))
+                switch (num)
+                {
+                    case 1:
+                        lr1.Resolve(Environment.GetEnvironmentVariable("LAB_PATH") + "\\input.txt",
+                        Environment.GetEnvironmentVariable("LAB_PATH") + "\\output.txt");
+                        return 0;
+                    case 2:
+                        lr2.Resolve(Environment.GetEnvironmentVariable("LAB_PATH") + "\\input.txt",
+                        Environment.GetEnvironmentVariable("LAB_PATH") + "\\output.txt");
+                        return 0;
+                    case 3:
+                        lr3.Resolve(Environment.GetEnvironmentVariable("LAB_PATH") + "\\input.txt",
+                        Environment.GetEnvironmentVariable("LAB_PATH") + "\\output.txt");
+                        return 0;
+                }
+            }
+            else
+            {
+                string userDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+                string inputPath = Path.Combine(userDirectory, "input.txt");
+                string outputPath = Path.Combine(userDirectory, "output.txt");
+
+                if (File.Exists(inputPath) && File.Exists(outputPath))
                 {
                     switch (num)
                     {
                         case 1:
-                            lr1.Resolve(Environment.GetEnvironmentVariable("LAB_PATH") + "\\input.txt",
-                            Environment.GetEnvironmentVariable("LAB_PATH") + "\\output.txt");
-                            break;
+                            lr1.Resolve(inputPath, outputPath);
+                            return 0;
                         case 2:
-                            lr2.Resolve(Environment.GetEnvironmentVariable("LAB_PATH") + "\\input.txt",
-                            Environment.GetEnvironmentVariable("LAB_PATH") + "\\output.txt");
-                            break;
+                            lr2.Resolve(inputPath, outputPath);
+                            return 0;
                         case 3:
-                            lr3.Resolve(Environment.GetEnvironmentVariable("LAB_PATH") + "\\input.txt",
-                            Environment.GetEnvironmentVariable("LAB_PATH") + "\\output.txt");
-                            break;
-                    }
-                }
-                else
-                {
-                    string userDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
-                    string inputPath = Path.Combine(userDirectory, "input.txt");
-                    string outputPath = Path.Combine(userDirectory, "output.txt");
-
-                    if (File.Exists(inputPath) && File.Exists(outputPath))
-                    {
-                        switch (num)
-                        {
-                            case 1:
-                                lr1.Resolve(inputPath, outputPath);
-                                break;
-                            case 2:
-                                lr2.Resolve(inputPath, outputPath);
-                                break;
-                            case 3:
-                                lr3.Resolve(inputPath, outputPath);
-                                break;
-                        }
+                            lr3.Resolve(inputPath, outputPath);
+                            return 0;
                     }
                 }
             }
         }
-        return 0;
+        throw new Exception("Something went wrong");
     }
     static void Main(string[] args)
     {
@@ -194,7 +192,7 @@ class Program
             }
             catch (Exception)
             {
-                Console.WriteLine("Невідома команда. Для довідки введіть 'help'.");
+                Console.WriteLine("Помилка");
             }
             Console.WriteLine("------------------------");
         }

@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="">
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Profile">Профіль</a>
+    <h1 class="display-4">Лабораторні роботи 1, 2 та 3</h1>
+    <ul>Виконати лабораторну роботу:
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Labs" asp-action="RunLab1">Lab1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Labs" asp-action="RunLab2">Lab2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Labs" asp-action="RunLab3">Lab3</a>
+        </li>
+    </ul>
+</div>

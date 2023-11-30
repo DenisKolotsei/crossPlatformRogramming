@@ -1,0 +1,28 @@
+﻿@{
+}
+
+<h1>Для завершення реэстрації введіть номер телефону</h1>
++380
+<input id="input1" type="number" pattern="[0-9]{8}" maxlength="8" />
+<br />
+<button id="myButton">Зареэструватись</button>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#myButton").click(function () {
+            $.ajax({
+                url: "/Home/HandleReg",
+                type: "POST",
+                data: { phone: $("#input1").val()},
+                success: function (data) {
+                    if (data.success) {
+                        window.location.href = "/Home/Index";
+                    } else {
+                        alert("Запрос не выполнен");
+                    }
+                }
+            });
+        });
+    });
+</script>

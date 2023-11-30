@@ -1,0 +1,44 @@
+﻿@{
+}
+
+<div class="">
+    <ul>
+        <h3>Виконати лабораторну роботу 2:</h3>
+        <h4>
+            Знайдіть n-й елемент послідовності, що строго зростає, яка описується
+            наступними правилами:
+            1. число 1 є елементом послідовності;
+            2. якщо a – елемент послідовності, то 2a, 3a, 5a також є елементами
+            послідовності;
+            3. послідовності належать лише елементи, задані правилами 1 та 2.
+        </h4>
+        <li class="">
+            Введіть пергий рядок
+            <input type="number" id="input1" value=""/>
+        </li>
+    </ul>
+    <button id="myButton"> Run </button>
+    <ul>
+        <h3>Результат</h3>
+        <li class="nav-item" id="res1">
+           
+        </li>
+    </ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myButton").click(function () {
+                // Вызов AJAX-запроса для отправки данных на сервер
+                $.ajax({
+                    url: "/Labs/HandleRunLab2", // Замените на свой URL и действие контроллера
+                    type: "POST",
+                    data: {number: parseInt($("#input1").val())},
+                    success: function (result) {
+                        $("#res1").html(result.res1);
+                    },
+                });
+            });
+        });
+    </script>
+</div>

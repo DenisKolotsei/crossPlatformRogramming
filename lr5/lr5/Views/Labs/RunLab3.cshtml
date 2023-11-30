@@ -1,0 +1,61 @@
+﻿@{
+}
+
+<div class="">
+    <ul>
+        <h3>Виконати лабораторну роботу 3:</h3>
+        <h4>
+            На шахівниці N×N в клітці (x1, y1) стоїть голодний шаховий кінь. Він хоче
+            потрапити до клітини (x2, y2), де росте смачна шахова трава. Яку найменшу
+            кількість ходів він має для цього зробити?
+        </h4>
+        <li class="">
+            Значення 1
+            <input type="number" id="input1" value=""/>
+        </li>
+        <li class="">
+            Значення 2
+            <input type="number" id="input2" value=""/>
+        </li>
+        <li class="">
+            Значення 3
+            <input type="number" id="input3" value="" />
+        </li>
+        <li class="">
+            Значення 4
+            <input type="number" id="input4" value=""/>
+        </li>
+        <li class="">
+            Значення 5
+            <input type="number" id="input5" value="" />
+        </li>
+    </ul>
+    <button id="myButton"> Run </button>
+    <ul>
+        <h3>Результат</h3>
+        <li class="nav-item" id="res1">
+           
+        </li>
+    </ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myButton").click(function () {
+                // Вызов AJAX-запроса для отправки данных на сервер
+                $.ajax({
+                    url: "/Labs/HandleRunLab3", // Замените на свой URL и действие контроллера
+                    type: "POST",
+                    data: {n: parseInt($("#input1").val()),
+                        x1: parseInt($("#input2").val()),
+                        y1: parseInt($("#input3").val()),
+                        x2: parseInt($("#input4").val()),
+                        y2: parseInt($("#input5").val())},
+                    success: function (result) {
+                        $("#res1").html(result.res1);
+                    },
+                });
+            });
+        });
+    </script>
+</div>

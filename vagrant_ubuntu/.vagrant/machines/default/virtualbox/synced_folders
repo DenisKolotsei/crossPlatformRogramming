@@ -1,1 +1,1 @@
-{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/KNU_FIT/crossPlatformRogramming/vagrant_ubuntu","disabled":false,"__vagrantfile":true}}}
+{"virtualbox":{"/home/vagrant/lr5-server":{"guestpath":"/home/vagrant/lr5-server","hostpath":"D:/KNU_FIT/crossPlatformRogramming/lr5/lr5/bin/Release/net6.0/publish","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/KNU_FIT/crossPlatformRogramming/vagrant_ubuntu","disabled":false,"__vagrantfile":true}}}
