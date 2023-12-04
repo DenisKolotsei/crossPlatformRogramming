@@ -1,0 +1,25 @@
+.Lab{
+    padding-left: 20px;
+}
+
+.Lab h4{
+    width: 800px;
+}
+
+.inputsPlace{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputsPlace input{
+    margin: 10px 0px;
+    width: 300px;
+}
+
+.solveLabButton{
+    padding: 10px 20px;
+}
+
+.resPlace{
+    font-size: 20px;
+}

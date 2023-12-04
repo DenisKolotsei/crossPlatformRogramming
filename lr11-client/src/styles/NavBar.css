@@ -1,0 +1,15 @@
+.NavBar{
+    background-color: rgb(132, 132, 132);
+    width: 100%;
+    display: flex;
+    padding: 20px;
+}
+
+.link{
+    border-radius: 15px;
+    padding: 5px 10px;
+    background-color: rgb(63, 63, 63);
+    text-decoration: none;
+    color: white;
+    margin-right: 20px;
+}
